@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     private class BtnCopyZipFileOnClickListener implements android.view.View.OnClickListener {    // Important, implements parts
         @Override
         public void onClick(View view) {
-            presenter.copyFileToMobile("Mastrad_probe_ota_fileware_v3.00.zip");
+            presenter.copyFileToMobile("Mastrad_probe_ota_firmware_v3.00.zip");
 
         }
     }
