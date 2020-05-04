@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.home.ziptest.contract.MainActivityContract;
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     private static final String TAG = MainActivity.class.getSimpleName();
     private MainActivityContract.Presenter presenter;
 
-    private Button mbtnCopyZipFile;
+    private Button mbtnCopyZipFile, mbtnZipVersion;
+    private TextView mtvVer;
     private boolean iWork = false;
     private static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 100;
     private int mCheckBLEPermission = 0;
@@ -57,9 +59,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void init() {
+        mbtnZipVersion = (Button) findViewById(R.id.btnZipVersion);
         mbtnCopyZipFile = (Button) findViewById(R.id.btnCopyZipFile);
+        mtvVer = (TextView) findViewById(R.id.tvVer);
 
+        mbtnZipVersion.setOnClickListener(new BtnZipVersionOnClickListener());
         mbtnCopyZipFile.setOnClickListener(new BtnCopyZipFileOnClickListener());
+
     }
 
     @Override
@@ -77,11 +83,23 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     }
 
+    @Override
+    public void showVer(String version) {
+        mtvVer.setText(version);
+    }
+
     private class BtnCopyZipFileOnClickListener implements android.view.View.OnClickListener {    // Important, implements parts
         @Override
         public void onClick(View view) {
-            presenter.copyFileToMobile("Mastrad_probe_ota_firmware_v3.00.zip");
+            presenter.copyFileToMobile("JoeyTest_R_v3.00.zip");
 
+        }
+    }
+
+    private class BtnZipVersionOnClickListener implements  android.view.View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            presenter.getFileVersion();
         }
     }
 
